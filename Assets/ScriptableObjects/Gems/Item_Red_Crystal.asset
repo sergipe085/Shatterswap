@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230cef2b8bbaea04780280e9eac334fc, type: 3}
+  m_Name: Item_Red_Crystal
+  m_EditorClassIdentifier: 
+  itemName: 
+  image: {fileID: 21300000, guid: 20f2757439c4c8c4193bfaf6d896cfb1, type: 3}
+  explosionEffectPrefab: {fileID: 7331789025789507443, guid: 54f02a8c63bc03a4c8b0baa2dbb53b38, type: 3}
