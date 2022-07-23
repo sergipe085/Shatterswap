@@ -30,6 +30,8 @@ public class DamageManager : Singleton<DamageManager>
             damage += memberWithAffinity.baseDamage * match.GetLength();
         }
 
+        if (damage <= 0) return;
+
         DoDamageToEnemy(damage);
     }
 }
