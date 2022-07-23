@@ -16,6 +16,8 @@ public class GridSystem
 
     public event Action OnEndMove = null;
 
+    private Vector3 positionOffset = Vector3.zero;
+
     public GridSystem(Vector2 _size) {
         this.size = _size;
 
@@ -41,10 +43,12 @@ public class GridSystem
         }
     }
 
-    public void CreateGridObjectVisuals(GridObjectVisual _gridObjectVisual, Transform parent) {
+    public void CreateGridObjectVisuals(GridObjectVisual _gridObjectVisual, Transform parent, Vector2 offsetPosition) {
+        positionOffset = offsetPosition;
+
         for(int x = 0; x < size.x; x++) {
             for(int y = 0; y < size.y; y++) {
-                GridObjectVisual gridObjectVisual = GameObject.Instantiate<GridObjectVisual>(_gridObjectVisual, new Vector3(x - size.x / 2, y - size.y / 2, 0), Quaternion.identity);
+                GridObjectVisual gridObjectVisual = GameObject.Instantiate<GridObjectVisual>(_gridObjectVisual, positionOffset + new Vector3(x - size.x / 2, y - size.y / 2, 0), Quaternion.identity);
                 gridObjectVisual.Initialize(gridArray[x, y]);
                 gridObjectVisual.transform.SetParent(parent);
             }
@@ -52,16 +56,16 @@ public class GridSystem
     }
 
     public GridPosition WorldToGridPosition(Vector2 worldPosition) {
-        GridPosition gridPosition = new GridPosition(Mathf.RoundToInt((worldPosition.x / cellSize) + size.x / 2), Mathf.RoundToInt((worldPosition.y / cellSize) + size.y / 2));
+        GridPosition gridPosition = new GridPosition(Mathf.RoundToInt(((worldPosition.x - positionOffset.x) / cellSize) + size.x / 2), Mathf.RoundToInt(((worldPosition.y - positionOffset.y) / cellSize) + size.y / 2));
         return gridPosition;
     }
 
     public Vector2 GridToWorldPosition(GridPosition gridPosition) {
-        return new Vector2(gridPosition.x - size.x / 2, gridPosition.y - size.y / 2);
+        return new Vector2(gridPosition.x - size.x / 2, gridPosition.y - size.y / 2) + (Vector2)positionOffset;
     }
 
     public GridObject GetGridObjectByWorldPoint(Vector2 worldPosition) {
-        GridObject gridObject = gridArray[Mathf.RoundToInt((worldPosition.x / cellSize) + size.x / 2), Mathf.RoundToInt((worldPosition.y / cellSize) + size.y / 2)];
+        GridObject gridObject = gridArray[Mathf.RoundToInt(((worldPosition.x - positionOffset.x) / cellSize) + size.x / 2), Mathf.RoundToInt(((worldPosition.y - positionOffset.y) / cellSize) + size.y / 2)];
         return gridObject;
     }
 

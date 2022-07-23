@@ -14,7 +14,7 @@ public class GridManager : Singleton<GridManager>
 
     private void Start() {
         gridSystem = new GridSystem(gridSize);
-        gridSystem.CreateGridObjectVisuals(debugPrefab, gridObjectVisualContainer.transform);
+        gridSystem.CreateGridObjectVisuals(debugPrefab, gridObjectVisualContainer.transform, transform.position);
         gridSystem.OnEndMove += () => OnEndMove?.Invoke();
 
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;

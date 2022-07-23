@@ -10,6 +10,7 @@ public class EnemyController : Singleton<EnemyController>
 
 
     public event Action<float> OnTakeDamageEvent = null;
+    public event Action OnDieEvent = null;
 
     private void Start() {
         TurnSystem.Instance.OnTurnChanged += HandleTurnChanged;
@@ -29,6 +30,12 @@ public class EnemyController : Singleton<EnemyController>
 
     public void Damage(int damage) {
         currentHealth -= damage;
+
+        if (currentHealth <= 0) {
+            Debug.Log("DIE");
+            OnDieEvent?.Invoke();
+            return;
+        }
         OnTakeDamageEvent?.Invoke(GetHealthPercentage());
     }
 

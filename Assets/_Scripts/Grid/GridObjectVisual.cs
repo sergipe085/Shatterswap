@@ -50,7 +50,7 @@ public class GridObjectVisual : MonoBehaviour
     }
 
     private void GridObject_OnSelect() {
-        transform.DOPunchScale(new Vector3(0.2f, 0.2f), 1.0f);
+        transform.DOPunchScale(new Vector3(0.2f, 0.2f), 0.1f, 0, 0).SetEase(Ease.InOutCubic);
     }
 
     private void SpawnExplosion() {
